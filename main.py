@@ -1,10 +1,11 @@
 import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer
 import pickle
 
 # Load the tokenizer and model
-with open('tokenizer.pkl', 'rb') as handle:
+with open('tokenizer.pkl', 'wb') as handle:
     tokenizer = pickle.load(handle)
 
 model = tf.keras.models.load_model('xss_model.h5')
