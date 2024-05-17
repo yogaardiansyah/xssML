@@ -2,6 +2,7 @@ import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
+import pandas as pd
 
 # Load the dataset
 df = pd.read_csv('https://raw.githubusercontent.com/yogaardiansyah/xssML/main/XSS_dataset.csv', encoding='utf-8-sig')
