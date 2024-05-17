@@ -1,6 +1,7 @@
 streamlit
-tensorflow
-keras-tuner
-pandas
-scikit-learn
-numpy
+tensorflow==2.15.0
+pandas==2.0.3
+numpy==1.25.2
+matplotlib==3.7.1
+keras_tuner==1.4.7
+scikit-learn==1.2.2
