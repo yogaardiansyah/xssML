@@ -2,11 +2,17 @@ import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
-import pickle
 
-# Load the tokenizer and model
-with open('tokenizer.pkl', 'wb') as handle:
-    tokenizer = pickle.load(handle)
+# Load the dataset
+df = pd.read_csv('https://raw.githubusercontent.com/yogaardiansyah/xssML/main/XSS_dataset.csv', encoding='utf-8-sig')
+df = df[df.columns[-2:]]
+
+# Get Sentences data from data frame
+sentences = df['Sentence'].values
+
+# Initialize and fit tokenizer
+tokenizer = Tokenizer(num_words=10000, oov_token="<OOV>")
+tokenizer.fit_on_texts(sentences)
 
 model = tf.keras.models.load_model('xss_model.h5')
 
