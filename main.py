@@ -1,13 +1,21 @@
 import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-import pickle
+from tensorflow.keras.preprocessing.text import Tokenizer
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-# Load the tokenizer
-with open('tokenizer.pickle', 'rb') as handle:
-    tokenizer = pickle.load(handle)
+# Load the dataset
+df = pd.read_csv('https://raw.githubusercontent.com/yogaardiansyah/xssML/main/XSS_dataset.csv', encoding='utf-8-sig')
+df = df[df.columns[-2:]]  # assuming the last two columns are the relevant ones
+
+# Get Sentences data from data frame
+sentences = df['Sentence'].values
+
+# Initialize and fit tokenizer
+tokenizer = Tokenizer(num_words=10000, oov_token="<OOV>")
+tokenizer.fit_on_texts(sentences)
 
 # Load the model
 model = tf.keras.models.load_model('xss_model.h5')
@@ -25,10 +33,6 @@ def predict_xss(html_code):
     # Preprocess the input
     sequences = tokenizer.texts_to_sequences([html_code])
     padded_sequences = pad_sequences(sequences, maxlen=100)  # use the same maxlen used during training
-    
-    # Debugging print statements
-    st.write("Sequences:", sequences)
-    st.write("Padded Sequences Shape:", padded_sequences.shape)
     
     # Predict
     prediction = model.predict(padded_sequences)
