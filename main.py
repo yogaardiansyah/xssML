@@ -42,7 +42,7 @@ def predict_xss(html_code):
 def get_html_from_url(url):
     try:
         response = requests.get(url)
-        if response.status_code == 200):
+        if response.status_code == 200:
             soup = BeautifulSoup(response.content, 'html.parser')
             return soup.get_text()
         else:
@@ -80,6 +80,6 @@ qr_code_url = "https://raw.githubusercontent.com/yogaardiansyah/xssML/main/qrcod
 # Customize the display of the QR code image and the actual link
 col1, col2 = st.columns([1, 3])
 with col1:
-    st.image(qr_code_url, caption='Scan to access the live demo', use_column_width=False, width=250)
+    st.image(qr_code_url, caption='Scan to access the live demo', use_column_width=False, width=150)
 with col2:
     st.markdown(f'<p style="font-size:24px;">{live_demo_url}</p>', unsafe_allow_html=True)
