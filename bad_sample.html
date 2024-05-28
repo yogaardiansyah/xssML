@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Examples</title>
+</head>
+<body>
+    <h1>XSS Demonstration</h1>
+
+    <!-- Simple XSS through user input -->
+    <div>
+        <h2>Simple XSS</h2>
+        <p id="simple-xss">Hello, <script>document.write("<b>world</b>");</script></p>
+    </div>
+
+    <!-- XSS through image error -->
+    <div>
+        <h2>Image Error XSS</h2>
+        <img src="invalid.jpg" onerror="alert('XSS through image error!');">
+    </div>
+
+    <!-- XSS in URL -->
+    <div>
+        <h2>URL Parameter XSS</h2>
+        <a href="javascript:alert('XSS in URL!')">Click me</a>
+    </div>
+
+    <!-- XSS through user-controlled input -->
+    <div>
+        <h2>User Input XSS</h2>
+        <form id="xssForm">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name">
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+        <p id="userInput"></p>
+        <script>
+            function submitForm() {
+                var userInput = document.getElementById('name').value;
+                document.getElementById('userInput').innerHTML = "Hello, " + userInput;
+            }
+        </script>
+    </div>
+
+    <!-- XSS through CSS expressions -->
+    <div>
+        <h2>CSS Expression XSS (Deprecated in modern browsers)</h2>
+        <div style="width: expression(alert('XSS through CSS!'));">
+            Hover over this div
+        </div>
+    </div>
+
+    <!-- XSS through Event Handlers -->
+    <div>
+        <h2>Event Handler XSS</h2>
+        <button onclick="alert('XSS through event handler!')">Click me</button>
+    </div>
+
+    <!-- XSS through href attribute -->
+    <div>
+        <h2>Href Attribute XSS</h2>
+        <a href="javascript:alert('XSS through href!')">Click me</a>
+    </div>
+
+    <!-- XSS through SVG -->
+    <div>
+        <h2>SVG XSS</h2>
+        <svg onload="alert('XSS through SVG!')"></svg>
+    </div>
+
+</body>
+</html>
