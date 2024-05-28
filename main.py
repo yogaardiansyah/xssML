@@ -70,13 +70,15 @@ if st.button("Check for XSS"):
     else:
         st.warning("Please enter some HTML code or a URL to check.")
 
-# Add a button to provide access to the live demo
+# Add a section to provide access to the live demo
 st.write("---")
 st.write("Access the live demo at:")
 
 live_demo_url = "https://xssmlkompres.streamlit.app/"
-st.write(f"[Live Demo]({live_demo_url})")
-
-# Display QR code image
 qr_code_url = "https://raw.githubusercontent.com/yogaardiansyah/xssML/main/qrcode.png"
-st.image(qr_code_url, caption='Scan to access the live demo', use_column_width=True)
+
+col1, col2 = st.columns([1, 3])
+with col1:
+    st.image(qr_code_url, caption='Scan to access the live demo', use_column_width=True)
+with col2:
+    st.write(f"[Live Demo]({live_demo_url})")
